@@ -9,7 +9,7 @@
 #include <assert.h>
 #include "darray.h"
 
-int main(int argc, char **argv) {
+int main(void) {
     darray *array = da_create();
     for (int i=0; i<100; i++) {
         assert(da_append(array, i) == 1);

@@ -1,10 +1,14 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Iinclude -std=23
+CFLAGS = -g -Wall -Wextra -Iinclude -std=c2x
 
 TARGET = lib/darray.a
 
+.PHONY:
+
+all: $(TARGET) tests
+
 .PHONY: release
-release: CFLAGS += -03
+release: CFLAGS += -O3
 release: $(TARGET) tests
 
 .PHONOY: debug
@@ -26,9 +30,9 @@ $(TARGET): build build/darray.o
 	ar rcs $(TARGET) build/darray.o
 
 .PHONY: tests
-tests: LDLIBS += -lcheck -lsubunit
-tests: test/darray-tests.c
-	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) test/darray-tests.c $(TARGET) -o bin/tests/darray-tests
+tests: LDLIBS += -lcheck
+tests: test/darray_test.c
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) test/darray_test.c $(TARGET) -o bin/tests/darray_test
 
 build/darray.o: src/darray.c include/darray.h
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -c src/darray.c -o build/darray.o
