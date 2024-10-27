@@ -30,7 +30,7 @@ $(TARGET): build build/darray.o
 	ar rcs $(TARGET) build/darray.o
 
 .PHONY: tests
-tests: LDLIBS += -lcheck
+tests: LDLIBS += -lcheck -lsubunit
 tests: test/darray_test.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) test/darray_test.c $(TARGET) -o bin/tests/darray_test
 
